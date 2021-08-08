@@ -1,4 +1,4 @@
-<view class="indexContainer">
+<view class="indexContainer" wx:if="{{success}}">
   <!-- 轮播图区域 -->
   <swiper class="banners" indicator-dots indicator-color='ivory' indicator-active-color='#666699' autoplay
     interval='2800' easing-function='linear' circular>
