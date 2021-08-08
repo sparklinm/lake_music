@@ -12,7 +12,7 @@
     <view class="showSearchContent">
       <view class="searchContent">搜索内容：{{searchContent}}</view>
       <view class="searchList">
-        <view class="searchItem" wx:for="{{searchList}}" wx:key="id">
+        <view class="searchItem" wx:for="{{searchList}}" wx:key="id" data-song="{{item}}" bindtap="toSongDetail">
           <text class="iconfont icon-custom-search searchIcon"></text>
           <text class="content">{{item.name}}</text>
         </view>

@@ -2,7 +2,7 @@
   <!-- 轮播图区域 -->
   <swiper class="banners" indicator-dots indicator-color='ivory' indicator-active-color='#666699' autoplay
     interval='2800' easing-function='linear' circular>
-    <swiper-item wx:for="{{bannerList}}" wx:key="bannerId">
+    <swiper-item wx:for="{{bannerList}}" wx:key="bannerId" data-song="{{item.song}}" bindtap="toSongDetail">
       <image src="{{item.pic}}"></image>
     </swiper-item>
   </swiper>
@@ -12,14 +12,14 @@
       <text class="iconfont icon-tuijian"></text>
       <text>每日推荐</text>
     </view>
-    <view class="navItem">
+    <!-- <view class="navItem">
       <text class="iconfont icon-playlist"></text>
       <text>歌单</text>
     </view>
     <view class="navItem">
       <text class="iconfont icon-paihangbang-"></text>
       <text>排行榜</text>
-    </view>
+    </view> -->
     <view class="navItem" bindtap="toSearch">
       <text class="iconfont icon-custom-search"></text>
       <text>搜索音乐</text>
@@ -43,7 +43,7 @@
     </scroll-view>
   </view>
   <!-- 排行榜区域 -->
-  <view class="topList">
+  <view class="topList" wx:if="{{topList.length}}">
     <!-- 头部区域 -->
     <NavHeader title='排行榜' nav='热歌风向标'></NavHeader>
     <!-- 内容区域 -->

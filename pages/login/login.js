@@ -69,7 +69,7 @@ Page({
       wx.setStorageSync('userInfo', JSON.stringify(result.profile));
       // 跳转到个人中心页
       wx.reLaunch({
-        url: '/pages/personal/personal',
+        url: '/pages/index/index',
       })
     } else if (result.code === 400 || result.code === 502) {
       wx.showToast({

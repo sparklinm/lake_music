@@ -19,7 +19,7 @@ Page({
    */
   onLoad: function (options) {
 
-    if (!wx.getStorageSync("cookies")) {
+    if (!wx.getStorageSync("cookie")) {
       wx.redirectTo({
         url: '/pages/login/login',
       })
