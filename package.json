@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/lexinhu/lake_music#readme",
   "dependencies": {
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "pubsub-js": "^1.9.2"
   },

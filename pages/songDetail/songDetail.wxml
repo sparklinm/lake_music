@@ -1,11 +1,8 @@
-<view wx:if="{{!isCheck}}">
-  <text>个人学习项目，不提供具体的内容。</text>
-</view>
-<view wx:else class="songDetailContainer">
+<view class="songDetailContainer">
   <view class="author">{{song.ar[0].name}}</view>
   <view class="circle"></view>
-  <image class="needle {{isPlay && 'needleRotate'}}" src="/static/images/song/needle.png"></image>
-  <view class="discContainer {{isPlay && 'discAnimation'}}">
+  <image class="needle {{isPlaying && 'needleRotate'}}" src="/static/images/song/needle.png"></image>
+  <view class="discContainer {{isPlaying && 'discAnimation'}}">
     <image class="disc" src="/static/images/song/disc.png"></image>
     <image class="musicImg" src="{{song.al.picUrl}}"></image>
   </view>
@@ -26,7 +23,7 @@
   <view class="musicController">
     <!-- <text class="iconfont icon-danquxunhuan"></text> -->
     <text class="iconfont icon-shangyishou" id="pre" bindtap="switchMusic"></text>
-    <text class="big iconfont {{isPlay? 'icon-zantingtingzhi' : 'icon-kaishibofang'}}" bindtap="handleMusicPlay"></text>
+    <text class="big iconfont {{isPlaying? 'icon-zantingtingzhi' : 'icon-kaishibofang'}}" bindtap="playOrPause"></text>
     <text class="iconfont icon-xiayishou" id="next" bindtap="switchMusic"></text>
     <!-- <text class="iconfont icon-yinleliebiao"></text> -->
   </view>

@@ -36,6 +36,7 @@
   "plugins": [],
   "globals": {
       "Page": true,
-      "wx": true
+      "wx": true,
+      "Component":true
   }
 }

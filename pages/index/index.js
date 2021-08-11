@@ -1,4 +1,5 @@
 import request from '../../utils/request';
+import {toSongDetail} from '../../utils/util';
 import {useState, defineComponent, useEffect} from '../../utils/hook';
 import {useRequest, useRequestWithProcessError} from '../../custome-hook/useRequest';
 
@@ -50,13 +51,17 @@ function Index() {
 
     useEffect(() => {
         const {value: res} = fetchDataWithProcessError;
+        console.log(res);
         
         if (!res) {
             return;
         }
 
         const [bannerListData, recommendListData] = res;
-        const oBannerList = bannerListData.banners.filter((item) => item.song);
+        let oBannerList = bannerListData.banners.filter((item) => item.song);
+        if (!oBannerList.length) {
+            oBannerList = bannerListData.banners;
+        }
         const oRecommendList = recommendListData.result;
      
         setBannerList(oBannerList);
@@ -84,24 +89,17 @@ function Index() {
         data: {bannerList, recommendList, topList, success},
         methods: {
             toRecommendSong() {
-                wx.redirectTo({
+                wx.navigateTo({
                     url: '/pages/recommendSong/recommendSong',
                 });
             },
             toSongListDetail(event) {
-                wx.redirectTo({
+                wx.navigateTo({
                     url: '/pages/songListDetail/songListDetail?id=' + event.currentTarget.dataset.id,
                 });
             },
             // 跳转至 SongDetail
-            toSongDetail(event) {
-                const songDetail = event.currentTarget.dataset;
-                const {song} = songDetail;
-                wx.navigateTo({
-                    // 不能直接传递 song 对象，长度过长会被截取掉。
-                    url: '/pages/songDetail/songDetail?musicId=' + song.id,
-                });
-            },
+            toSongDetail,
             // 跳转搜索页
             toSearch() {
                 wx.navigateTo({

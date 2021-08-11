@@ -3,9 +3,9 @@
   <view class="header">
     <view class="searchInput">
       <text class="iconfont icon-custom-search searchIcon"></text>
-      <input type="text" placeholder="{{placeholderContent}}" bindinput="handleInputChange" />
+      <input value="{{searchValue}}" type="text" placeholder="{{placeholderContent}}" bindinput="handleInputChange" />
     </view>
-    <text class="cancel">取消</text>
+    <text class="cancel" bindtap = "clear">取消</text>
   </view>
   <!-- 搜索内容 -->
   <block wx:if="{{searchList.length}}">
@@ -25,7 +25,7 @@
       <view class="title">热搜榜</view>
       <view class="hotList">
         <!-- 热搜列表 -->
-        <view class="hotItem" wx:for="{{hotList}}" wx:key="index">
+        <view class="hotItem" wx:for="{{hotList}}" wx:key="index" bind:tap="searchHotSong" data-index="{{index}}">
           <text class="order">{{index+1}}</text>
           <text>{{item.searchWord}}</text>
           <image class="iconImg" wx:if="{{item.iconUrl}}" src="{{item.iconUrl}}"></image>

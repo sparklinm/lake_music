@@ -56,31 +56,44 @@ Page({
         }
 
         // 调用后端登录接口
-        const result = await request('/login/cellphone', {
-            phone,
-            password,
-            isLogin: true,
-        });
-        if (result.code === 200) {
-            wx.showToast({
-                title: '登录成功',
+        try {
+            wx.showLoading({
+                title: '登录中',
+                mask: true,
             });
-            // 将用户的信息存储到本地
-            wx.setStorageSync('userInfo', JSON.stringify(result.profile));
-            // 跳转到个人中心页
-            wx.reLaunch({
-                url: '/pages/index/index',
+            const result = await request('/login/cellphone', {
+                phone,
+                password,
+                isLogin: true,
             });
-        } else if (result.code === 400 || result.code === 502) {
+            if (result.code === 200) {
+                wx.showToast({
+                    title: '登录成功',
+                });
+                // 将用户的信息存储到本地
+                wx.setStorageSync('userInfo', JSON.stringify(result.profile));
+                // 跳转到个人中心页
+                wx.reLaunch({
+                    url: '/pages/index/index',
+                });
+            } else if (result.code === 400 || result.code === 502) {
+                wx.showToast({
+                    title: '手机号或密码发生错误',
+                    icon: 'none',
+                });
+            } else {
+                wx.showToast({
+                    title: '网络问题，登录失败',
+                    icon: 'none',
+                });
+            }
+        } catch (error) {
             wx.showToast({
-                title: '手机号或密码发生错误',
+                title: '网络问题，登录失败',
                 icon: 'none',
             });
-        } else {
-            wx.showToast({
-                title: '登录失败，请与管理员联系。',
-                icon: 'none',
-            });
+        } finally {
+            wx.hideLoading();
         }
     },
 
